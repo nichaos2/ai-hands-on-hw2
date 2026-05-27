@@ -1,0 +1,120 @@
+A time control is a mechanism in the tournament play of almost all two-player board games so that each round of the match can finish in a timely way and the tournament can proceed.
+
+
+For turn-based games such as chess, shogi or go, time controls are typically enforced by means of a game clock, which counts time spent on each player's turn separately. A player that spends more time than the time control allows is penalized, usually by the loss of the game. Time pressure (or time trouble or Zeitnot) is the situation where one player has very little time on their clock to complete their remaining moves.
+
+
+Classification
+
+The amount of time given to each player to complete their moves will vary from game to game. However, most games tend to change the classification of tournaments according to the length of time given to the players.
+
+
+In chess, various classification schemes are used. FIDE defines time controls based on the sum of the amount of time allotted to each player, plus the increment per move times 60. Any time control in which this sum is at least 60 minutes (120 minutes at the master level) is classical; any time control in which the sum is less than 60 but more than 10 minutes is rapid; any time control with a sum at or less than 10 minutes is blitz. However, both Lichess and Chess.com consider 10 minute games to be rapid rather than blitz. In addition, both sites have a separate bullet category for games in which less than 3 minutes are given to each player; Lichess additionally has hyperbullet (≤30s) and ultrabullet (≤15s) categories.
+
+
+In Go, anything under twenty minutes could be considered "blitz".
+
+
+Methodology
+
+The exact approach to using a game clock to regulate games varies considerably.
+
+
+Sudden death
+
+This is the simplest methodology. Each player is assigned a fixed amount of time for the whole game. If a player's main time expires, they generally lose the game.
+
+
+Overtime formats
+
+Here the game time is separated into two basic domains: the main time and the overtime. To switch between the two requires some trigger event, often the expiration of the main time. In chess, reaching a fixed number of moves can trigger the gain of a fixed amount of extra time. This usually occurs in long games after the 40th move: e.g. 120 minutes to complete the first 40 moves, and another 30 minutes added to the leftover 120 minutes to complete the rest of the game.
+
+
+Penalty formats
+
+Such methods exact a points penalty, or fine, on the player who breaches their time limit. One example occurs in Go, where the Ing Rules enforce fines on breaches of main time and overtime periods. The rules may also provide for a sudden death time control in addition to the penalty. In tournament Scrabble, the time control is standardized to 25 minutes per side with a 10-point penalty for each minute or part thereof that is used in excess, so that overstepping the allotted time by 61 seconds carries a 20-point penalty; a player who oversteps by 10 minutes automatically loses; in this case, their opponent is given enough additional points to win by one point, if they were not already in the lead at that time.
+
+
+Hourglass
+
+Each player's clock starts with a specified time (such as one minute or ten minutes). While one player is deciding a move, their clock time decreases and their opponent's clock time increases. This is analogous to an hourglass: sand empties from one container and fills the other. The sum of both clocks always remains the same, and slow moves give extra time to the opponent. There is no maximum amount of time allotted for a game with this timing method; if both players play quickly enough, the game will continue until its natural end.
+
+
+Use of this time control is uncommon.
+
+
+Game formats
+
+Go
+
+Byo-yomi
+
+This timing method is also used in shogi. The word is borrowed from Japanese; the term literally means "counting the seconds", or more generally, "countdown".
+
+
+After the main time is depleted, a player has a certain number of periods (for example five periods, each of thirty seconds). If a move is completed before the time expires, the time period resets and restarts the next turn. If a move is not completed within a time period, the time period will expire, and the next time period begins. This is written as maintime + number of byo-yomi time periods of byo-yomi time period. Using up the last period means that the player has lost on time. In some systems, such as certain Go title matches, there is no main time; instead, the time used is rounded up to the nearest whole increment, such as one minute, and the actual counting of time occurs toward the end of one player's time.
+
+
+A typical time control is "60 minutes + 30 seconds byo-yomi", which means that each player may make as many or as few moves as they choose during their first 60 minutes of thinking time, but after the hour is exhausted, they must make each move in thirty seconds or less. To enforce byo-yomi, a third person or a game clock with a byo-yomi option is necessary.
+
+
+In professional Go games and many amateur tournaments, a player has several byo-yomi periods, for example five periods of one minute each. If a player makes their move within a one-minute period, they retain all five periods for their future moves. If a player oversteps one minute, they start the following move in the second rather than the first byo-yomi period. In effect, the player has one minute per move plus four extra one-minute packets which may be used as needed, e.g. four moves of two minutes each, or one move of five minutes, or any other combination.
+
+
+In higher-level tournaments, such as the Kisei tournament, the player's time is often composed entirely of byo-yomi periods (for example, in an eight-hour game, the player may have 480 periods of one minute each), rather than having a main block of thinking time. In this case, the actual counting of time (verbally) begins once the player falls below a certain threshold of time, such as 10 minutes; when the time is being counted, the player is informed at intervals how much time they have used in their current period, and how many extra periods they have left. (For example, the time may be called at 10-second intervals, and when 55 and 58 seconds have been used; during a player's final minute, the last 10 seconds are counted one by one.) Similarly, in the televised NHK Cup tournament, the player has 30 seconds per move plus 10 extra one-minute periods which may be used as needed.
+
+
+When analog game clocks are used to enforce byo-yomi, it is more convenient to assign additional time for a block of moves, rather than for each move. In Canadian byo-yomi, a player typically gets 5 minutes for 10 to 20 moves. The IGS Go server uses a similar system, but the byo-yomi time is variable and always covers 25 moves. Thus the time control "20 minutes + 15 minutes byoyomi" on IGS means that after the initial 20 minutes of thinking time are over, a player is granted 15 additional minutes, which may be spent however they choose. If these minutes expire before they have made 25 more moves, they lose. If they make 25 more moves in less than 15 minutes, they are granted another 15 minutes of byo-yomi, and so on indefinitely.
+
+
+Canadian byo-yomi imposes a certain average speed of play, but allows the player to spend more time to ponder on difficult moves. Several byo-yomi periods in one move per period variant (also known as Japanese byo-yomi) serve essentially the same purpose, albeit to a lesser extent.
+
+
+Unused time during one byo-yomi period does not carry forward to future moves. This is in contrast to the Fischer clock often used in chess, with designations such as "5 minutes + 12 seconds per move". Under this time control each player has twelve seconds added to their clock after every move, starting from the first move, regardless of how much time they spend on each move. Thus if a player thinks for eight seconds before making their first move, they will have five minutes and four seconds on their clock after making it.
+
+
+Canadian overtime
+
+After using all of their main time, a player must make a certain number of moves within a certain period of time — for example, twenty moves within five minutes. In Go, players stop the clock, and the player in overtime counts out the required number of stones and sets the remaining stones out of reach so as not to become confused, whilst the opponent sets the clock to the overtime period. If all the moves are made in time, then another period of overtime starts — another set of stones and the timer again reset to the overtime period. If all the moves are not made in time, the player has lost on time. This is written as main time + number of moves to be completed in each time period in time period. In Progressive Canadian Overtime the required rate of play alters in additional overtime periods — e.g. 1 hour + 10 in 5, 20 in 5, 30 in 5, 40 in 5 etc.
+
+
+Chess
+
+Increment and delay methods
+
+These are the timing methods most often used in chess.
+
+
+In increment (also known as bonus and Fischer, after Bobby Fischer's patent on it), a specified amount of time is added to the player's main time after each move, unless the player's main time ran out before they completed their move. For example, if the time control is "G/90;inc30" (90 minutes of main time per player, with a 30-second increment each move), each player gets an additional 30 seconds added to their main time after each move, unless the player's main time ran out first. This is often notated as a "90+30" time control, with the first number indicating the minutes on the clock at the start of the game, followed by the number of seconds added to the clock per move.
+
+
+Under FIDE and US Chess rules, each player gets the increment for the first move as well. For example, with "G/3;inc2", each player starts with three minutes and two seconds on the first move. Not all digital chess clocks automatically give the increment for the first move; for those that don't, the increment time has to be added manually.
+
+
+Simple delay
+
+In the simple delay (also known as the US delay), the clock waits for a fixed delay period during each move before the player's main time starts counting down. For example, if the delay is ten seconds, the clock waits for ten seconds each move before the main time starts counting down.
+
+
+Bronstein delay
+
+The Bronstein delay (named after David Bronstein, its inventor), like increment, adds a fixed amount of time after each move, but no more than the amount of time spent to make the move. For example, if the delay is ten seconds and a player uses ten or more seconds for a move, ten seconds are added after they complete their move. If the player uses five seconds, only those five seconds are returned to the clock. This ensures that the main time left on the clock can never increase even if a player makes fast moves. As with increment, under FIDE and US Chess rules, the delay time is applied to the first move.
+
+
+Bronstein delay and Simple delay are very similar, but not equal. The difference is that with Bronstein delay the amount of time shown on the clock is the amount of time allowed to make the next move, while with Simple delay the delay is not included. Eg with a 30 seconds delay, and 35 seconds to make a move with Bronstein delay the clock would show 35 while with simple delay it would show 5. In terms of how much time a player is allotted during a game they are mathematically equivalent.  The advantage of the Bronstein delay is that the player can easily see how much time is remaining without mentally adding the delay to the main clock. The advantage of Simple delay is that the player can always tell whether the delay time or the main time is counting down.
+
+
+The simple delay is the form of delay most often used in the United States, while the Bronstein delay is more often used in most other countries.
+
+
+Other uses
+
+Time control has also been utilised in some game shows:
+
+
+See also
+
+References
+
+External links
+

@@ -1,0 +1,100 @@
+The game of chess is commonly divided into three phases: the opening, middlegame, and endgame. There is a large body of theory regarding how the game should be played in each of these phases, especially the opening and endgame. Those who write about chess theory, who are often also eminent players, are referred to as "chess theorists" or "chess theoreticians".
+
+
+"Opening theory" commonly refers to consensus, broadly represented by current literature on the openings. "Endgame theory" consists of statements regarding specific positions, or positions of a similar type, though there are few universally applicable principles. "Middlegame theory" often refers to maxims or principles applicable to the middlegame. The modern trend, however, is to assign paramount importance to analysis of the specific position at hand rather than to general principles.
+
+
+The development of theory in all of these areas has been assisted by the vast literature on the game. In 1913, preeminent chess historian H. J. R. Murray wrote in his 900-page magnum opus A History of Chess that, "The game possesses a literature which in contents probably exceeds that of all other games combined." He estimated that at that time the "total number of books on chess, chess magazines, and newspapers devoting space regularly to the game probably exceeds 5,000". In 1949, B. H. Wood estimated that the number had increased to about 20,000. David Hooper and Kenneth Whyld wrote in 1992 that, "Since then there has been a steady increase year by year of the number of new chess publications. No one knows how many have been printed..." The world's largest chess library, the John G. White Collection at the Cleveland Public Library, contains over 32,000 chess books and serials, including over 6,000 bound volumes of chess periodicals. Chess players today also avail themselves of computer-based sources of information.
+
+
+Opening theory
+
+The earliest printed work on chess theory whose date can be established with some exactitude is Repeticion de Amores y Arte de Ajedrez by the Spaniard Luis Ramirez de Lucena, published c. 1497, which included among other things analysis of eleven chess openings. Some of them are known today as the Giuoco Piano, Ruy Lopez, Petrov's Defense, Bishop's Opening, Damiano's Defense, and Scandinavian Defense, though Lucena did not use those terms.
+
+
+The authorship and date of the Göttingen manuscript are not established, and its publication date is estimated as being somewhere between 1471 and 1505. It is not known whether it or Lucena's book was published first. The manuscript includes examples of games with the openings now known as Damiano's Defence, Philidor's Defense, the Giuoco Piano, Petrov's Defense, the Bishop's Opening, the Ruy Lopez, the Ponziani Opening, the Queen's Gambit Accepted, 1.d4 d5 2.Bf4 Bf5 (a form of the London System), Bird's Opening, and the English Opening. Murray observes that it "is no haphazard collection of commencements of games, but is an attempt to deal with the Openings in a systematic way."
+
+
+Fifteen years after Lucena's book, Portuguese apothecary Pedro Damiano published the book Questo libro e da imparare giocare a scachi et de la partiti (1512) in Rome. It includes analysis of the Queen's Gambit Accepted, showing what happens when Black tries to keep the gambit pawn with ...b5. Damiano's book "was, in contemporary terms, the first bestseller of the modern game." Harry Golombek writes that it "ran through eight editions in the sixteenth century and continued on into the next century with unflagging popularity." Modern players know Damiano primarily because his name is attached to the weak opening Damiano's Defense (1.e4 e5 2.Nf3 f6?), although he condemned rather than endorsed it.
+
+
+These books and later ones discuss games played with various openings, opening traps, and the best way for both sides to play. Certain sequences of opening moves began to be given names, some of the earliest being Damiano's Defense, the King's Gambit (1.e4 e5 2.f4), the Queen's Gambit (1.d4 d5 2.c4), and the Sicilian Defense (1.e4 c5).
+
+
+Damiano's book was followed by general treatises on chess play by Ruy López de Segura (1561), Giulio Cesare Polerio (1590), Pietro Carrera (1617), Gioachino Greco (c. 1625), Joseph Bertin (1735), and François-André Danican Philidor (1749).
+
+
+The first author to attempt a comprehensive survey of the openings then known was Aaron Alexandre in his 1837 work Encyclopédie des Échecs. According to Hooper and Whyld, " Jaenisch produced the first openings analysis on modern lines in his Analyse nouvelle des ouvertures (1842-43)." In 1843, Paul Rudolf von Bilguer published the German Handbuch des Schachspiels, which combined the virtues of Alexandre and Jaenisch's works. The Handbuch, which went through several editions, last being published in several parts in 1912–16, was one of the most important opening references for many decades. The last edition of the Handbuch was edited by Carl Schlechter, who had drawn a match for the World Championship with Emanuel Lasker in 1910. International Master William Hartston called it "a superb work, perhaps the last to encase successfully the whole of chess knowledge within a single volume."
+
+
+The English master Howard Staunton, perhaps the world's strongest player from 1843 to 1851, included over 300 pages of analysis of the openings in his 1847 treatise The Chess Player's Handbook. That work immediately became the standard reference work in English-speaking countries, and was reprinted 21 times by 1935. However, "as time passed a demand arose for more up-to-date works in English". Wilhelm Steinitz, the first World Champion, widely considered the "father of modern chess," extensively analyzed various double king-pawn openings (beginning 1.e4 e5) in his book The Modern Chess Instructor, published in 1889 and 1895. Also in 1889, E. Freeborough and C. E. Ranken published the first edition of Chess Openings Ancient and Modern; later editions were published in 1893, 1896, and 1910. In 1911, R. C. Griffith and J. H. White published the first edition of Modern Chess Openings. It is now the longest-published opening treatise in history; the fifteenth edition (commonly called MCO-15), by Grandmaster Nick de Firmian, was published in April 2008.
+
+
+According to Hooper and Whyld, the various editions of Modern Chess Openings, the last edition of the Handbuch, and the fourth edition of Ludvig Collijn's Lärobok i Schack ("Textbook of Chess") in Swedish, with groundbreaking contributions by Rubinstein, Reti, Spielmann and Nimzowitch, "were the popular reference sources for strong players between the two world wars." In 1937–39 former World Champion Max Euwe published a twelve-volume opening treatise, De theorie der schaakopeningen, in Dutch. It was later translated into other languages.
+
+
+In the late 1930s to early 1950s Reuben Fine, one of the world's strongest players, also became one of its leading theoreticians, publishing important works on the opening, middlegame, and endgame. These began with his revision of Modern Chess Openings, which was published in 1939. In 1943, he published Ideas Behind the Chess Openings, which sought to explain the principles underlying the openings. In 1948, he published his own opening treatise, Practical Chess Openings, a competitor to MCO. In 1964, International Master I.A. Horowitz published the 789-page tome Chess Openings: Theory and Practice, which in addition to opening analysis includes a large number of illustrative games.
+
+
+In 1966, the first volume of Chess Informant was published in Belgrade, Yugoslavia, containing 466 annotated games from the leading chess tournaments and matches of the day. The hugely influential Chess Informant series has revolutionized opening theory. Its great innovation is that it expresses games in languageless figurine algebraic notation and annotated them using no words, but rather seventeen symbols, whose meanings were explained at the beginning of the book in six different languages. This enabled readers around the world to read the same games and annotations, thus greatly accelerating the dissemination of chess ideas and the development of opening theory. The editors of Chess Informant later introduced other publications using the same principle, such as the five-volume Encyclopedia of Chess Openings and Encyclopedia of Chess Endings treatises.  Chess Informant was originally published twice a year, and since 1991 has been published thrice annually. Volume 100 was published in 2007. It now uses 57 symbols, explained in 10 languages, to annotate games (see Punctuation (chess)), and is available in both print and electronic formats. In 2005, former World Champion Garry Kasparov wrote, "We are all Children of the Informant."
+
+
+In the 1990s and thereafter, the development of opening theory has been further accelerated by such innovations as extremely strong chess engines such as Fritz and Rybka, software such as ChessBase, and the sale of multi-million-game databases such as ChessBase's Mega 2013 database, with over 5.4 million games. Today, the most important openings have been analyzed over 20 moves deep, sometimes well into the endgame, and it is not unusual for leading players to introduce theoretical novelties on move 25 or even later.
+
+
+Thousands of books have been written on chess openings. These include both comprehensive openings encyclopedias such as the Encyclopedia of Chess Openings and Modern Chess Openings; general treatises on how to play the opening such as Mastering the Chess Openings (in four volumes), by International Master John L. Watson; and myriad books on specific openings, such as Understanding the Grünfeld and Chess Explained: The Classical Sicilian. "Books and monographs on openings are popular, and as they are thought to become out of date quickly there is a steady supply of new titles." According to Andrew Soltis, "Virtually all the new information about chess since 1930 has been in the opening."
+
+
+Middlegame theory
+
+Middlegame theory is considerably less developed than either opening theory or endgame theory. Watson writes, "Players wishing to study this area of the game have a limited and rather unsatisfactory range of resources from which to choose."
+
+
+One of the earliest theories to gain attention was that of William Steinitz, who posited that a premature attack against one's opponent in an equal position could be repelled by skillful defence, and so a player's best bet was to slowly maneuver with the goal of accumulating small advantages.  Emanuel Lasker in Lasker's Manual of Chess and Max Euwe in The Development of Chess Style outlined theories that they attributed to Steinitz.
+
+
+Leading player and theorist Aron Nimzowitsch's influential books, My System (1925), Die Blockade (1925) (in German), and Chess Praxis (1936), are among the most important works on the middlegame.  Nimzowitsch called attention to the possibility of letting one's opponent occupy the centre with pawns while you exert control with your pieces as in the Nimzo-Indian or Queen's Indian defences. He pointed out how in positions with interlocking pawn chains, one could attack the chain at its base by advancing one's own pawns and carrying out a freeing move (pawn break).  He also drew attention to the strategy of occupying open files with one's rooks in order to later penetrate to the seventh rank where they could attack the enemy pawns and hem in the opponent's king.  Another of his key concepts was prophylaxis, moves aimed at limiting the opponent's mobility to the point where he would no longer have any useful moves.
+
+
+In 1952, Fine published the 442-page The Middle Game in Chess, perhaps the most comprehensive treatment of the subject up until that time. The mid-20th century also saw the publication of The Middle Game, volumes 1 and 2, by former World Champion Max Euwe and Hans Kramer, and a series of books by the Czechoslovak-German grandmaster Luděk Pachman: three volumes of Complete Chess Strategy, Modern Chess Strategy, Modern Chess Tactics, and Attack and Defense in Modern Chess Tactics.
+
+
+Another key turning point in middlegame theory came with the release of Alexander Kotov's book Think like a Grandmaster in 1971.  Kotov outlined how a player calculates by developing a tree of variations in his head, and recommended that players only examine each branch of the tree once.  He also noted how some players seem to fall victim to what is now known as Kotov's Syndrome: they calculate out a large range of different lines, become dissatisfied with the result, and realizing that they are short on time, play a completely new candidate move without even checking whether it is sound.  More recently, Jonathan Tisdall, John Nunn and Andrew Soltis have elaborated on Kotov's tree theory further.
+
+
+In 1999, Watson's Secrets of Modern Chess Strategy: Advances Since Nimzowitsch was published, in which Watson discusses the revolution in middlegame theory that has occurred since Nimzowitsch's time.
+
+
+Many books on specific aspects of the middlegame exist, such as The Art of Attack in Chess by Vladimir Vuković, The Art of Sacrifice in Chess by Rudolf Spielmann, The Art of the Checkmate by Georges Renaud and Victor Kahn, The Basis of Combination in Chess by J. du Mont, and The Art of Defense in Chess by Andrew Soltis.
+
+
+Endgame theory
+
+Many significant chess treatises, beginning with the earliest works, have included some analysis of the endgame. Lucena's book (c. 1497) concluded with 150 examples of endgames and chess problems.
+
+
+The second edition (1777) of Philidor's Analyse du jeu des Échecs devoted 75 pages of analysis to various endgames. These included a number of theoretically important endings, such as rook and bishop versus rook, queen versus rook, queen versus rook and pawn, and rook and pawn versus rook. Certain positions in the endings of rook and bishop versus rook, rook and pawn versus rook, and queen versus rook have become known as Philidor's position. Philidor concluded his book with two pages of (in the English translation), "Observations on the ends of parties", in which he set forth certain general principles about endings, such as: "Two knights alone cannot mate" (see Two knights endgame), the ending with a bishop and rook pawn whose queening square is on the opposite color from the bishop is drawn (see Wrong rook pawn § Bishop and pawn), and a queen beats a bishop and knight (see Pawnless chess endgame § Queen versus two minor pieces).
+
+
+Staunton's The Chess-Player's Handbook (1847) includes almost 100 pages of analysis of endgames. Some of Staunton's analysis, such as his analysis of the very rare rook versus three minor pieces endgame, is surprisingly sophisticated. At page 439, he wrote, "Three minor Pieces are much stronger than a Rook, and in cases where two of them are Bishops will usually win without much difficulty, because the player of the Rook is certain to be compelled to lose him for one of his adversary's Pieces. If, however, there are two Knights and one Bishop opposed to a Rook, the latter may generally be exchanged for the Bishop, and as two Knights are insufficient of themselves to force checkmate, the game will be drawn." Modern-day endgame tablebases confirm Staunton's assessments of both endings. Yet Reuben Fine, 94 years after Staunton, erroneously wrote on page 521 of Basic Chess Endings that both types of rook versus three minor piece endings "are theoretically drawn." Grandmaster Pal Benko, an authority on the endgame and like Fine a world-class player at his peak, perpetuated Fine's error in his 2003 revision of Basic Chess Endings. Grandmaster Andrew Soltis in a 2004 book expressly disagreed with Staunton, claiming that the rook versus two bishops and knight ending is drawn with correct play. At the time Benko and Soltis offered their assessments (in 2003 and 2004, respectively), endgame tablebases had already proven that Staunton was correct, and that Fine, Benko, and Soltis were wrong, although the ending can take up to 68 moves to win.
+
+
+
+Staunton's conclusions on these endgames were anticipated by the British master George Walker, who wrote in 1846 (and perhaps earlier):
+
+Although the two Bishops and Kt win, as a general proposition, against Rook, yet the two Knights with a Bishop cannot expect the same success; and the legitimate result of such conflict would be a draw. The Bishops, united, are stronger than the Knights, as they strike from a greater distance. When the two Knights are left with a Bishop, the Rook has also the chance of exchanging for the latter, which can hardly be avoided by his adversary, and the two Knights, alone, have not the mating power.
+
+In 1941 Reuben Fine published his monumental 573-page treatise Basic Chess Endings, the first attempt at a comprehensive treatise on the endgame. A new edition, revised by Pal Benko, was published in 2003.
+Soviet writers published an important series of books on specific endings:  Rook Endings by Grigory Levenfish and Vasily Smyslov, Pawn Endings by Yuri Averbakh and I. Maizelis, Queen and Pawn Endings by Averbakh, Bishop Endings by Averbakh, Knight Endings by Averbakh and Vitaly Chekhover, Bishop v. Knight Endings by Yuri Averbakh, Rook v. Minor Piece Endings by Averbakh, and Queen v. Rook/Minor Piece Endings by Averbakh, Chekhover, and V. Henkin.  These books by Averbakh and others were collected into the five-volume Comprehensive Chess Endings in English.
+
+
+In recent years, computer-generated endgame tablebases have revolutionized endgame theory, conclusively showing best play in many complicated endgames that had vexed human analysts for over a century, such as queen and pawn versus queen. They have also overturned human theoreticians' verdicts on a number of endgames; for example by proving that the two bishops versus knight ending, which had been thought drawn for over a century, can be a win for the bishops (see Pawnless chess endgame § Minor pieces only and Chess endgame § Effect of tablebases on endgame theory).
+
+
+Several important works on the endgame have been published in recent years, among them Dvoretsky's Endgame Manual, Fundamental Chess Endings by Karsten Müller and Frank Lamprecht, Basic Endgames: 888 Theoretical Positions by Yuri Balashov and Eduard Prandstetter, Chess Endgame Lessons by Benko, and Secrets of Rook Endings and Secrets of Pawnless Endings by John Nunn. Some of these have been aided by analysis from endgame tablebases.
+
+
+See also
+
+References
+
