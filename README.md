@@ -6,7 +6,7 @@ This exercise is an extension of the first AI hands-on project, repo [here](http
 
 Implement Retrieval-Augmented Generation (RAG) on the documents related to HW1.
 
-# Knowledge Base & RAG system
+# Task 1: Knowledge Base & RAG system
 
 ## 1.1 Document Collection
 
@@ -39,4 +39,18 @@ _Disclaimer_: Time limit is pressing so for the time being we will choose one an
 ## 1.3 Retrieval 
 
 - code to retrieve in `rag.py`
-- `run_rag_retrieve.py` has a simple snippet to test the `retrieval` snippet
+- from root run `python -m runners.run_rag_retrieve` to test the `retrieval` snippet
+
+
+# Task 2: Model as a Tool
+
+## Use the best model
+
+The folder models includes:
+- the best model,
+- the scaler, and
+- the target_encoder
+
+Them method `predict_chess_match_outcome` in `src/tools.py` has the logic to use the best tool to predict the outcome
+
+- from root run `python -m runners.run_predict_chess_match_outcome` to test the `predict_chess_match_outcome` snippet.
