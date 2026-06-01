@@ -1,21 +1,11 @@
-import os
 import time
-from pathlib import Path
 
-from dotenv import load_dotenv
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-env_path = os.path.join(BASE_DIR, ".env")
-load_dotenv(dotenv_path=env_path)
-API_KEY = os.getenv("GEMINI_API_KEY")
-EMBEDDING_VERSION = "models/gemini-embedding-001"
-LOAD_DIR = os.path.join(BASE_DIR, "data", "documents")
-PERSIST_DIRECTORY = os.path.join(BASE_DIR, "data", "vector_store")
+from src.config import API_KEY, EMBEDDING_VERSION, LOAD_DIR, PERSIST_DIRECTORY
 
 
 def create_vector_store():
