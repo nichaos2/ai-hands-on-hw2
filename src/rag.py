@@ -2,6 +2,7 @@ import time
 
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
+from langchain_core.tools import tool
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -61,10 +62,12 @@ def create_vector_store():
     print("You do not need to run this script again unless you add new text documents.")
 
 
+@tool
 def retrieve_chess_context(query: str) -> str:
     """
-    Searches the Chroma database for the 3 most relevant chunks based on
-    the user's query and returns them as a single formatted string.
+    Searches the domain knowledge database for information about chess.
+    Use this tool whenever the user asks about chess rules, Elo ratings,
+    time controls, ECO codes, or why the model predicts certain things.
     """
     # Use similarity_search to find the top 3 chunks (k=3)
     # This automatically converts the text query to a vector and calculates the distance
