@@ -71,5 +71,45 @@ def create_vector_store():
     print("You do not need to run this script again unless you add new text documents.")
 
 
+def retrieve_chess_context(query: str) -> str:
+    """
+    Searches the Chroma database for the 3 most relevant chunks based on
+    the user's query and returns them as a single formatted string.
+    """
+    # Use similarity_search to find the top 3 chunks (k=3)
+    # This automatically converts the text query to a vector and calculates the distance
+
+    # TODO DRY in this part
+    # same code to create gemini embeddings and vector_store instance
+    gemini_embeddings = GoogleGenerativeAIEmbeddings(
+        model=EMBEDDING_VERSION,
+        google_api_key=API_KEY,
+    )
+
+    vector_store = Chroma(
+        # documents=chunks,
+        # embedding=gemini_embeddings,
+        embedding_function=gemini_embeddings,
+        persist_directory=PERSIST_DIRECTORY,
+    )
+
+    retrieved_docs = vector_store.similarity_search(query, k=3)
+
+    # Check if anything was returned
+    if not retrieved_docs:
+        return "No relevant information found in the database."
+
+    # Format and concatenate the chunks into a single string
+    context_pieces = []
+    for i, doc in enumerate(retrieved_docs):
+        # Adding a visual separator helps the LLM distinguish between different chunks
+        chunk_text = f"--- Document Chunk {i + 1} ---\n{doc.page_content}\n"
+        context_pieces.append(chunk_text)
+
+    final_context_string = "\n".join(context_pieces)
+
+    return final_context_string
+
+
 if __name__ == "__main__":
     create_vector_store()

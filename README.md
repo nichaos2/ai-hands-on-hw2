@@ -34,3 +34,9 @@ _Disclaimer_: Time limit is pressing so for the time being we will choose one an
     - _Note_: documents have many empty lines between paragraphs, maximum is 45712 chars and min is 2634 chars
 - We utilize Chroma (via langchain-chroma) for its specific implementation features as show in the lab (mainly becuase it runs in local env)
 - For the embedding we will use Gemini
+
+
+## 1.3 Retrieval 
+
+- code to retrieve in `rag.py`
+- `run_rag_retrieve.py` has a simple snippet to test the `retrieval` snippet
