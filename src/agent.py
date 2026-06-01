@@ -83,9 +83,8 @@ def clean_agent_output(result):
     return result
 
 
-# 4. INTERACTIVE CHAT LOOP
-def run_conversational_agent():
-    # Bind the tools to the model natively
+# Create Conversational Agent
+def create_conversational_agent():
     model_with_tools = LLM.bind_tools(TOOLS)
 
     # Rebuild the tool agent chain manually so we can insert 'fix_gemini_message'
@@ -108,6 +107,35 @@ def run_conversational_agent():
         input_messages_key="input",
         history_messages_key="chat_history",
     )
+    return conversational_agent
+
+
+# 4. INTERACTIVE CHAT LOOP
+def run_conversational_agent():
+    # Bind the tools to the model natively
+    # model_with_tools = LLM.bind_tools(TOOLS)
+
+    # # Rebuild the tool agent chain manually so we can insert 'fix_gemini_message'
+    # agent = (
+    #     RunnablePassthrough.assign(
+    #         agent_scratchpad=lambda x: format_to_tool_messages(x["intermediate_steps"])
+    #     )
+    #     | prompt
+    #     | model_with_tools
+    #     | RunnableLambda(fix_gemini_message)  # <-- FIXES THE HANG HERE
+    #     | ToolsAgentOutputParser()
+    # )
+
+    # agent_executor = AgentExecutor(agent=agent, tools=TOOLS, verbose=True)
+    # cleaned_executor = agent_executor | clean_agent_output
+
+    # conversational_agent = RunnableWithMessageHistory(
+    #     cleaned_executor,
+    #     get_session_history,
+    #     input_messages_key="input",
+    #     history_messages_key="chat_history",
+    # )
+    conversational_agent = create_conversational_agent()
 
     print("\n" + "=" * 50)
     print("CHESS AI AGENT INITIALIZED (LANGCHAIN VERSION)")

@@ -108,3 +108,57 @@ Because the system adjusts based on expectations, it naturally pushes players to
 
 ***Note:** You mentioned "ELO code" in your question. In the context of chess, "Elo" is a name (not an acronym, so it is usually written as "Elo" rather than "ELO"), and "ECO" (Encyclopedia of Chess Openings) is the term used for the codes that classify specific opening sequences (like the C20 you mentioned earlier).*
 ```
+
+**NOTE** if the questions change order there is going to be a different answer.
+
+### Why does changing the order of questions change the answers?
+
+This happens because Large Language Models (LLMs) do not "think" about concepts in isolation; they generate text by predicting the next logical word based on **the entire context window**. 
+
+When you use LangChain's memory feature, every time you ask a question, your entire previous conversation is secretly pasted into the prompt right above your new question. 
+- If you ask Question A, then Question B, the LLM answers Question B while "looking" at the context of Question A. 
+- If you reverse the order, the LLM answers Question A with zero prior context. 
+
+Because the text it is reading is mathematically different, the probabilities of which words it should generate next shift entirely. This is why AI engineers spend so much time on "prompt engineering"—the exact sequence of words and history fundamentally alters the model's behavior.
+
+### A Comment on `temperature=0.2`
+
+In  `agent.py` the model is initialized with `temperature=0.2`. 
+
+_Temperature_ is a setting between 0.0 and 1.0 (or sometimes up to 2.0) that controls the "creativity" or "randomness" of the LLM. 
+* A high temperature (e.g., 0.8 - 1.0) makes the model output more diverse, creative, and unpredictable words. This is great for writing poetry or brainstorming ideas, but terrible for writing code or analyzing data.
+* A low temperature (e.g., 0.0 - 0.2) makes the model highly deterministic, focused, and factual. It will consistently pick the most statistically likely next word.
+
+Because the agent acts as a data-driven prediction tool and a factual domain expert for chess rules, we set the temperature to 0.2. This ensures the model sticks strictly to the exact numbers the XGBoost tool returns and the exact rules in the RAG documents, removing the risk of hallucination, e.g., fake stats or getting "creative" with the rules of chess.
+
+## 6. Installation and execution 
+
+### Installation
+
+- Create a virtual environment: `python -m venv venv`
+- Activate virtual environment (nix system): `source venv/bin/activate/`
+- Install libraries/dependencies: `pip install -r requirements.txt`
+- Create .env file with your `GEMINI_API_KEY`
+
+### Execution
+
+In the root folder run: `python -m src.agent`
+
+
+### 7. REST API Integration (FastAPI)
+
+The agent is exposed as a production-ready REST API using FastAPI, allowing external applications or front-end interfaces to interact with it seamlessly.
+
+Architecture:
+- `main.py`: The application entry point. It initializes the FastAPI server and connects the routing.
+- `src/api.py`: Contains the `APIRouter` and the Pydantic schemas defining the API's contract.
+
+Endpoint: `POST /chat`
+Accepts a natural language message and routes it through the LangChain agent.
+
+Request Schema (JSON):
+```json
+{
+  "message": "Predict a match where White is 1500 and Black is 1200.",
+  "session_id": "user-12345"
+}
