@@ -162,6 +162,7 @@ Request Schema (JSON):
   "message": "Predict a match where White is 1500 and Black is 1200.",
   "session_id": "user-12345"
 }
+```
 
 You can test it in swagger, postman or even Curl
 
