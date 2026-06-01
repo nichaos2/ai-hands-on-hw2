@@ -162,3 +162,9 @@ Request Schema (JSON):
   "message": "Predict a match where White is 1500 and Black is 1200.",
   "session_id": "user-12345"
 }
+
+You can test it in swagger, postman or even Curl
+
+```bash
+curl -X 'POST' 'http://127.0.0.1:8000/chat' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"message": "Predict a match for me: White is rated 1650, Black is 1400, they play a C20 opening, 15+2 increment, and it lasts 35 turns. The game is rated, started at 1504210000000, ended at 1504210000000, opening ply was 4, opening name is Kings Pawn.", "session_id": "curl-test-session"}'
+```
