@@ -19,6 +19,9 @@ MODEL_PATH = os.path.join(BASE_DIR, "models", "best_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "models", "scaler.pkl")
 ENCODER_PATH = os.path.join(BASE_DIR, "models", "target_encoder.pkl")
 
+# dataset
+DATASET_PATH = os.path.join(BASE_DIR, "data", "datasets", "lichess_dataset.csv")
+
 if __name__ == "__main__":
     print(API_KEY)
     print(EMBEDDING_VERSION)
@@ -27,3 +30,4 @@ if __name__ == "__main__":
     print(MODEL_PATH)
     print(SCALER_PATH)
     print(ENCODER_PATH)
+    print(DATASET_PATH)

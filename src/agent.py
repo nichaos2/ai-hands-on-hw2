@@ -16,9 +16,13 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 from src.config import API_KEY
 from src.rag import retrieve_chess_context
-from src.tools import predict_chess_match_outcome
+from src.tools import predict_chess_match_outcome, recommend_strategic_opening
 
-TOOLS = [predict_chess_match_outcome, retrieve_chess_context]
+TOOLS = [
+    predict_chess_match_outcome,
+    retrieve_chess_context,
+    recommend_strategic_opening,
+]
 
 LLM = ChatGoogleGenerativeAI(
     model="gemini-3.1-flash-lite",
@@ -29,9 +33,10 @@ LLM = ChatGoogleGenerativeAI(
 # LANGCHAIN PROMPT & AGENT
 SYSTEM_PROMPT = """
 You are an expert AI assistant specializing in chess match prediction and chess domain knowledge.
-You have access to two specific tools:
+You have access to three specific tools:
 1. 'predict_chess_match_outcome': Use this to predict the winner of a match based on stats.
 2. 'retrieve_chess_context': Use this to answer general questions about chess concepts, rules, etc.
+3. 'recommend_strategic_opening': Use this to advise a winning opening given the user's color (colour) and the players' rating (ELO).
 
 Rules:
 - Autonomously decide which tool to use based on the user's prompt.
@@ -112,35 +117,14 @@ def create_conversational_agent():
 
 # 4. INTERACTIVE CHAT LOOP
 def run_conversational_agent():
-    # Bind the tools to the model natively
-    # model_with_tools = LLM.bind_tools(TOOLS)
-
-    # # Rebuild the tool agent chain manually so we can insert 'fix_gemini_message'
-    # agent = (
-    #     RunnablePassthrough.assign(
-    #         agent_scratchpad=lambda x: format_to_tool_messages(x["intermediate_steps"])
-    #     )
-    #     | prompt
-    #     | model_with_tools
-    #     | RunnableLambda(fix_gemini_message)  # <-- FIXES THE HANG HERE
-    #     | ToolsAgentOutputParser()
-    # )
-
-    # agent_executor = AgentExecutor(agent=agent, tools=TOOLS, verbose=True)
-    # cleaned_executor = agent_executor | clean_agent_output
-
-    # conversational_agent = RunnableWithMessageHistory(
-    #     cleaned_executor,
-    #     get_session_history,
-    #     input_messages_key="input",
-    #     history_messages_key="chat_history",
-    # )
     conversational_agent = create_conversational_agent()
 
+    #
     print("\n" + "=" * 50)
     print("CHESS AI AGENT INITIALIZED (LANGCHAIN VERSION)")
     print("Type 'exit' or 'quit' to end the session.")
     print("=" * 50 + "\n")
+    #
 
     session_id = str(uuid.uuid4())
 

@@ -153,19 +153,58 @@ Architecture:
 - `main.py`: The application entry point. It initializes the FastAPI server and connects the routing.
 - `src/api.py`: Contains the `APIRouter` and the Pydantic schemas defining the API's contract.
 
-Endpoint: `POST /chat`
-Accepts a natural language message and routes it through the LangChain agent.
 
-Request Schema (JSON):
-```json
-{
-  "message": "Predict a match where White is 1500 and Black is 1200.",
-  "session_id": "user-12345"
-}
-```
+Execution:
+- **Execute** with `python -m main`; _Note_: the application runs on port 8000 so if the user runs locally another application there teh application will not run.
+- Browse to `localhost:8000/docs` and test in swagger
+- Endpoint: `POST /chat`; accepts a natural language message and routes it through the LangChain agent.
+- Request Schema (JSON):
+    ```json
+    {
+    "message": "Predict a match where White is 1500 and Black is 1200.",
+    "session_id": "user-12345"
+    }
+    ```
 
 You can test it in swagger, postman or even Curl
 
 ```bash
 curl -X 'POST' 'http://127.0.0.1:8000/chat' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"message": "Predict a match for me: White is rated 1650, Black is 1400, they play a C20 opening, 15+2 increment, and it lasts 35 turns. The game is rated, started at 1504210000000, ended at 1504210000000, opening ply was 4, opening name is Kings Pawn.", "session_id": "curl-test-session"}'
 ```
+
+## 8. Extra Tool - Opening Advisor
+
+TL;DR : The tool suggests an opening base on the dataset used for the training of the model.
+
+To elevate the agent’s practical utility, a third core capability was added to its toolkit: a data-driven Strategic Opening Advisor (`recommend_strategic_opening`). 
+
+This functionalloty gives added value because instead of relying on hardcoded heuristics or static definitions, this tool dynamically queries the historical data from the HW1 dataset (`lichess_games.csv`) to provide actual statistical recommendations tailored to a player's specific competitive scenario. 
+
+Additionally, the dataset is put to use in more ways than in the training of the model. 
+
+Finally, it differs from the the prediction tool in the sense that the latter needs many parameters to predict the outcome of a match, whereas the extra tool needs only 3 parameters (Player colour and ratings) to provide an opening suggestion.
+
+### Tool Mechanics & JSON Schema
+
+When a user asks for strategic advice based on color and rating, the LangChain agent automatically extracts the necessary contextual variables and maps them to the following schema:
+*   `player_rating` (integer): The skill level of the user.
+*   `opponent_rating` (integer): The skill level of the opponent.
+*   `player_color` (string): The piece color the user is controlling (`'white'` or `'black'`).
+
+### Advanced Analytics Filtering
+
+When invoked, the tool executes an intensive Pandas pipeline:
+1.  _Scenario Isolation_: It calculates the mathematical rating differential ($player\_rating - opponent\_rating$) to categorize the match state into one of three buckets: _Underdog_ ($\le -100$), _Favorite_ ($\ge 100$), or _Evenly Matched_ ($< 100$).
+2.  _Color Perspective Adjustment:_ It slices the dataset to look strictly at games from the user's tactical perspective (e.g., assessing how underdogs perform specifically when managing the *White pieces* vs the *Black pieces*).
+3.  _Statistical Significance Thresholding:_ To prevent rare or obscure openings from skewing the results (e.g., an opening played only once resulting in a deceptive 100% win rate), the tool enforces a strict filter requiring an opening to have been played _at least 50 times_ under those exact match conditions.
+4.  _Win-Rate Conversion:_ It calculates the precise historical win percentage for that color, sorts the results, and surfaces the top 3 most successful openings alongside tailored strategic text.
+
+#### Example
+
+The message of the user could be something like the following:
+> "I play with white/black and I have ELO 2100 against a player 1800. Suggest opening"
+
+The answer would be something along the lines:
+> {
+  "response": "As the stronger player (2100 ELO vs 1800 ELO) playing with **Black**, you have a significant rating advantage. Based on historical data for this rating gap, here are some strategic recommendations for your opening:\n\n### Recommended Openings for Black:\n1. **Queen's Pawn Game** (Win Rate: 88.9%)\n2. **Indian Game** (Win Rate: 87.3%)\n3. **Van't Kruijs Opening** (Win Rate: 83.0%)\n\n### Strategic Advice:\nSince you are rated 300 points higher than your opponent, your primary goal as Black is to neutralize White's first-move advantage efficiently and transition into a middlegame where your superior positional understanding can dictate the pace.\n\n*   **Prioritize Solid Structures:** You don't need to force complications. By choosing solid, well-established systems like the Queen's Indian or Nimzo-Indian (often found within the \"Indian Game\" category), you can ensure a stable position.\n*   **Exploit Imbalances:** Once you have achieved equality, look for small imbalances—such as a slightly better pawn structure or more active piece placement—that you can exploit over the course of the game.\n*   **Patience is Key:** Against an 1800-rated player, you don't need to win in the first 20 moves. Focus on making sound, principled moves. Your opponent is statistically more likely to commit a positional or tactical error as the game progresses into the middlegame or endgame.\n\nGood luck with your game! If you'd like to dive deeper into specific lines within these openings or simulate the match outcome once you have a specific opening in mind, feel free to ask."
+}

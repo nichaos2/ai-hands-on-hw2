@@ -4,7 +4,7 @@ import joblib
 import pandas as pd
 from langchain_core.tools import tool
 
-from src.config import ENCODER_PATH, MODEL_PATH, SCALER_PATH
+from src.config import DATASET_PATH, ENCODER_PATH, MODEL_PATH, SCALER_PATH
 
 if (
     os.path.exists(MODEL_PATH)
@@ -167,3 +167,89 @@ def predict_chess_match_outcome(
 
     except Exception as e:
         return f"Prediction Tool Error: Failed to compute prediction due to: {str(e)}"
+
+
+# EXTRA TOOL
+@tool
+def recommend_strategic_opening(
+    player_rating: int, opponent_rating: int, player_color: str
+) -> str:
+    """
+    Queries historical match data to find the most successful chess openings
+    based on the player's color and the rating difference between the two players.
+    'player_color' must be either 'white' or 'black'.
+    """
+    try:
+        # Load the dataset
+        df = pd.read_csv(DATASET_PATH)
+
+        # Normalize color input to match our dataset ('White' or 'Black')
+        color = player_color.strip().lower()
+        if color not in ["white", "black"]:
+            return "Error: The agent must specify whether the player is playing 'white' or 'black'."
+
+        rating_diff = player_rating - opponent_rating
+        min_games = 50
+
+        # 2. Filter the data strictly from the perspective of the user's color
+        if color == "White":
+            # Rating diff from White's perspective
+            if rating_diff <= -100:
+                target_games = df[(df["white_rating"] - df["black_rating"]) <= -100]
+                scenario_name = "White Underdog (100+ point disadvantage)"
+                advice = "Playing as White against a stronger opponent, focus on openings that dictate the pace but keep the position solid to avoid early tactical traps."
+            elif rating_diff >= 100:
+                target_games = df[(df["white_rating"] - df["black_rating"]) >= 100]
+                scenario_name = "White Favorite (100+ point advantage)"
+                advice = "As the stronger player with the White pieces, these openings maximize your first-move advantage to aggressively pressure weaker opponents."
+            else:
+                target_games = df[abs(df["white_rating"] - df["black_rating"]) < 100]
+                scenario_name = "White, Evenly Matched"
+                advice = "In an even match, these White openings yield the highest statistical conversion rate."
+
+        else:
+            # Rating diff from Black's perspective
+            if rating_diff <= -100:
+                target_games = df[(df["black_rating"] - df["white_rating"]) <= -100]
+                scenario_name = "Black Underdog (100+ point disadvantage)"
+                advice = "Playing Black against a stronger opponent is tough. Data suggests sharp, asymmetric defenses give the highest statistical chance of a counter-attacking upset."
+            elif rating_diff >= 100:
+                target_games = df[(df["black_rating"] - df["white_rating"]) >= 100]
+                scenario_name = "Black Favorite (100+ point advantage)"
+                advice = "As the stronger player with Black, these defenses allow you to safely equalize and outplay your opponent in the middlegame."
+            else:
+                target_games = df[abs(df["white_rating"] - df["black_rating"]) < 100]
+                scenario_name = "Black, Evenly Matched"
+                advice = "In an even match, these Black defenses provide the best winning chances without compromising solid structure."
+
+        # 3. Find games where the user's specific color actually WON
+        target_wins = target_games[target_games["winner"] == color]
+
+        # --- CALCULATE FINAL STATISTICS ---
+        win_counts = target_wins.groupby("opening_name").size()
+        total_counts = target_games.groupby("opening_name").size()
+
+        stats = pd.DataFrame({"wins": win_counts, "total_games": total_counts}).fillna(
+            0
+        )
+
+        # Filter out insignificant data
+        stats = stats[stats["total_games"] >= min_games]
+
+        # Calculate the true win percentage for that specific color
+        stats["win_rate"] = (stats["wins"] / stats["total_games"]) * 100
+
+        # Sort to find the top 3
+        top_3 = stats.sort_values(by="win_rate", ascending=False).head(3)
+
+        if top_3.empty:
+            return f"Not enough historical data for {color} in this specific rating gap to make a statistically confident recommendation."
+
+        recommendations = ""
+        for i, (opening, row) in enumerate(top_3.iterrows(), 1):
+            recommendations += f"{i}. **{opening}** (Win Rate: {row['win_rate']:.1f}% for {color} across {int(row['total_games'])} games)\n"
+
+        return f"### Historical Data Recommendations: {scenario_name}\n\n{recommendations}\n**Strategic Advice:** {advice}"
+
+    except Exception as e:
+        return f"Could not calculate opening statistics: {str(e)}"
