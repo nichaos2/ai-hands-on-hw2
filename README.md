@@ -6,7 +6,7 @@ This project implements a conversational AI agent designed specifically for the 
 
 ## 2. Architecture
 
-The system is built using the **LangChain** framework (specifically `langchain_classic` agents) and is powered by Google's `gemini-3.1-flash-lite` LLM. 
+The system is built using the _LangChain_ framework (specifically `langchain_classic` agents) and is powered by Google's `gemini-3.1-flash-lite` LLM. 
 
 The agent has access to exactly two tools:
 - `retrieve_chess_context`: A RAG-based tool that queries a vector database for domain knowledge.
@@ -26,11 +26,11 @@ The RAG system is backed by a vector store containing detailed documents coverin
 
 ### Collected Documents Include
 
-- Explanations of the **Elo Rating System**, including its history, mathematical probability expectations, and point-exchange mechanics.
-- The **Encyclopaedia of Chess Openings (ECO)**, detailing how openings are categorized (A through E) and standard opening names.
+- Explanations of the _Elo Rating System_, including its history, mathematical probability expectations, and point-exchange mechanics.
+- The _Encyclopaedia of Chess Openings (ECO)_, detailing how openings are categorized (A through E) and standard opening names.
 - General tournament rules and time control formats (e.g., increments).
 
-**Why they were chosen:**
+_Why they were chosen:_
 These documents were explicitly selected to explain the specific features the machine learning model uses to make predictions. Users often do not know what "ECO" or "opening_ply" means; the RAG system allows the agent to answer questions like *"What is an ECO code?"* or *"How do ratings affect the outcome?"* contextually.
 
 ## 4. HW1 Model Integration
@@ -172,7 +172,7 @@ You can test it in swagger, postman or even Curl
 curl -X 'POST' 'http://127.0.0.1:8000/chat' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"message": "Predict a match for me: White is rated 1650, Black is 1400, they play a C20 opening, 15+2 increment, and it lasts 35 turns. The game is rated, started at 1504210000000, ended at 1504210000000, opening ply was 4, opening name is Kings Pawn.", "session_id": "curl-test-session"}'
 ```
 
-## 8. Extra Tool - Opening Advisor
+## 8. Extra Tool - Opening Advisor (Task 5)
 
 TL;DR : The tool suggests an opening base on the dataset used for the training of the model.
 
@@ -208,3 +208,64 @@ The answer would be something along the lines:
 > {
   "response": "As the stronger player (2100 ELO vs 1800 ELO) playing with **Black**, you have a significant rating advantage. Based on historical data for this rating gap, here are some strategic recommendations for your opening:\n\n### Recommended Openings for Black:\n1. **Queen's Pawn Game** (Win Rate: 88.9%)\n2. **Indian Game** (Win Rate: 87.3%)\n3. **Van't Kruijs Opening** (Win Rate: 83.0%)\n\n### Strategic Advice:\nSince you are rated 300 points higher than your opponent, your primary goal as Black is to neutralize White's first-move advantage efficiently and transition into a middlegame where your superior positional understanding can dictate the pace.\n\n*   **Prioritize Solid Structures:** You don't need to force complications. By choosing solid, well-established systems like the Queen's Indian or Nimzo-Indian (often found within the \"Indian Game\" category), you can ensure a stable position.\n*   **Exploit Imbalances:** Once you have achieved equality, look for small imbalances—such as a slightly better pawn structure or more active piece placement—that you can exploit over the course of the game.\n*   **Patience is Key:** Against an 1800-rated player, you don't need to win in the first 20 moves. Focus on making sound, principled moves. Your opponent is statistically more likely to commit a positional or tactical error as the game progresses into the middlegame or endgame.\n\nGood luck with your game! If you'd like to dive deeper into specific lines within these openings or simulate the match outcome once you have a specific opening in mind, feel free to ask."
 }
+
+## 9. Streaming Output Support (Task 6)
+
+The `/chat/stream` endpoint supports token-by-token text streaming using FastAPI's `StreamingResponse` and the standard _Server-Sent Events (SSE)_ protocol (`text/event-stream`). 
+
+Instead of waiting for the underlying XGBoost model calculations, RAG retrieval context windows, or total LLM text generation to finish completely, chunks are pushed out to the client instantly as they are formulated.
+
+#### Technical Architecture
+
+1. _`astream_events(version="v2")`_: Rather than calling `.invoke()`, the API utilizes LangChain's asynchronous event-streaming pipeline. 
+2. _Event Filtering_: The streaming generator listens specifically for `on_chat_model_stream` events, ignoring internal system logs and tool schemas, capturing only the exact text tokens produced by the LLM.
+3. _SSE Protocol Format_: Tokens are packed into stringified JSON structures formatted as raw `data: {"token": "..."}\n\n` streams, which is compatible with web-standard `EventSource` and modern front-end streaming hooks.
+
+#### How to test Streaming with cURL
+
+Because the response type is a stream, running a standard `curl` command will display the chunks printing out sequentially in real-time right inside your terminal:
+
+```bash
+curl -N -X 'POST' \
+  '[http://127.0.0.1:8000/chat](http://127.0.0.1:8000/chat)' \
+  -H 'accept: text/event-stream' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "message": "Predict a match where White is 1500 and Black is 1200.",
+  "session_id": "streaming-session-999"
+}'
+```
+
+#### Example
+
+The message of the user could be something like the following:
+> "I play with white I have 1800 and my oponent 1500 ELO"
+
+The answer would be something along the lines:
+>
+```
+data: {"token": [{"type": "text", "text": "Since", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " you are playing as White with a significant rating advantage (1800 vs", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " 1500), you have a great opportunity to dictate the pace of the game.\n\nBased on historical data for", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " this rating gap, here are some strategic recommendations for your opening:\n\n1.  **Scandinavian Defense: Mieses-Kotroc Variation", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": "** (Win Rate: 38.5% for White)\n2.  **Queen's Pawn Game:", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " Chigorin Variation** (Win Rate: 27.4% for White)\n3.  **French", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " Defense: Knight Variation** (Win Rate: 27.1% for White)\n\n**Strategic Advice:**\nWith", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " a 300-point advantage, your goal is to reach a solid, playable middlegame where you can", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " leverage your superior understanding of positional play and tactics. These openings are designed to give you a stable structure, allowing you to out", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": "play your opponent as the game progresses.\n\nWould you like me to explain any of these openings in more detail, or do", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": " you have a specific match you'd like me to analyze?", "index": 0}]}
+
+data: {"token": [{"type": "text", "text": "", "extras": {"signature": "EjQKMgEM[more chars]"}, "index": 0}]}
+```
+
