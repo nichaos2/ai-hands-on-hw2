@@ -1,5 +1,11 @@
 # Chess AI Assistant: Prediction & Domain Knowledge Agent
 
+This exercise is an extension of the first AI hands-on project, repo [here](https://github.com/nichaos2/ai-hand-on-hw1) 
+
+## Problem Description
+
+Implement Retrieval-Augmented Generation (RAG) on the documents related to HW1.
+
 ## 1. System Overview
 
 This project implements a conversational AI agent designed specifically for the chess domain. The assistant provides a seamless chat interface where users can ask general questions about chess concepts or request predictions for specific match setups. By combining a Retrieval-Augmented Generation (RAG) pipeline for domain knowledge with an optimized XGBoost machine learning model for match forecasting, the agent bridges the gap between historical data analysis and natural language education. 
