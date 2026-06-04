@@ -161,8 +161,8 @@ Architecture:
 
 
 Execution:
-- **Execute** with `python -m main`; _Note_: the application runs on port 8000 so if the user runs locally another application there teh application will not run.
-- Browse to `localhost:8000/docs` and test in swagger
+- **Execute** with `python -m main`; _Note_: the application runs on port 8008 deliberately (usually there is another local application that runs on port 8000)
+- Browse to `localhost:8008/docs` and test in swagger
 - Endpoint: `POST /chat`; accepts a natural language message and routes it through the LangChain agent.
 - Request Schema (JSON):
     ```json
@@ -175,7 +175,7 @@ Execution:
 You can test it in swagger, postman or even Curl
 
 ```bash
-curl -X 'POST' 'http://127.0.0.1:8000/chat' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"message": "Predict a match for me: White is rated 1650, Black is 1400, they play a C20 opening, 15+2 increment, and it lasts 35 turns. The game is rated, started at 1504210000000, ended at 1504210000000, opening ply was 4, opening name is Kings Pawn.", "session_id": "curl-test-session"}'
+curl -X 'POST' 'http://127.0.0.1:8008/chat' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"message": "Predict a match for me: White is rated 1650, Black is 1400, they play a C20 opening, 15+2 increment, and it lasts 35 turns. The game is rated, started at 1504210000000, ended at 1504210000000, opening ply was 4, opening name is Kings Pawn.", "session_id": "curl-test-session"}'
 ```
 
 ## 8. Extra Tool - Opening Advisor (Task 5)
@@ -207,13 +207,22 @@ When invoked, the tool executes an intensive Pandas pipeline:
 
 #### Example
 
-The message of the user could be something like the following:
+- The message of the user could be something like the following:
+
 > "I play with white/black and I have ELO 2100 against a player 1800. Suggest opening"
 
-The answer would be something along the lines:
+- The answer (would be something along the lines):
+
 > {
   "response": "As the stronger player (2100 ELO vs 1800 ELO) playing with **Black**, you have a significant rating advantage. Based on historical data for this rating gap, here are some strategic recommendations for your opening:\n\n### Recommended Openings for Black:\n1. **Queen's Pawn Game** (Win Rate: 88.9%)\n2. **Indian Game** (Win Rate: 87.3%)\n3. **Van't Kruijs Opening** (Win Rate: 83.0%)\n\n### Strategic Advice:\nSince you are rated 300 points higher than your opponent, your primary goal as Black is to neutralize White's first-move advantage efficiently and transition into a middlegame where your superior positional understanding can dictate the pace.\n\n*   **Prioritize Solid Structures:** You don't need to force complications. By choosing solid, well-established systems like the Queen's Indian or Nimzo-Indian (often found within the \"Indian Game\" category), you can ensure a stable position.\n*   **Exploit Imbalances:** Once you have achieved equality, look for small imbalances—such as a slightly better pawn structure or more active piece placement—that you can exploit over the course of the game.\n*   **Patience is Key:** Against an 1800-rated player, you don't need to win in the first 20 moves. Focus on making sound, principled moves. Your opponent is statistically more likely to commit a positional or tactical error as the game progresses into the middlegame or endgame.\n\nGood luck with your game! If you'd like to dive deeper into specific lines within these openings or simulate the match outcome once you have a specific opening in mind, feel free to ask."
 }
+
+### Additonal Idea - TODO
+
+As an implementation, it would be very interesting (and useful) to add a Web search tool,  so the tool would answer questions like
+- who would win betweem the user and a famous player (like Kasparov), or 
+- give information of who is the GOAT of Chess (answer should be Magnus Carlsen),
+- or in general infomration that is not contained in the `documents/data` files.
 
 ## 9. Streaming Output Support (Task 6)
 
@@ -231,47 +240,31 @@ Instead of waiting for the underlying XGBoost model calculations, RAG retrieval 
 
 Because the response type is a stream, running a standard `curl` command will display the chunks printing out sequentially in real-time right inside your terminal:
 
-```bash
-curl -N -X 'POST' \
-  '[http://127.0.0.1:8000/chat](http://127.0.0.1:8000/chat)' \
-  -H 'accept: text/event-stream' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "message": "Predict a match where White is 1500 and Black is 1200.",
-  "session_id": "streaming-session-999"
-}'
-```
-
-#### Example
-
 The message of the user could be something like the following:
-> "I play with white I have 1800 and my oponent 1500 ELO"
+> "Predict a match where White is 1500 and Black is 1200."
 
-The answer would be something along the lines:
->
+- curl
+```bash
+curl -N -X 'POST' 'http://127.0.0.1:8008/chat/stream' -H 'accept: text/event-stream' -H 'Content-T
+ype: application/json' -d '{"message": "Predict a match where White is 1500 and Black is 1200.", "session_id": "streamin
+g-session-999"}'
 ```
-data: {"token": [{"type": "text", "text": "Since", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": " you are playing as White with a significant rating advantage (1800 vs", "index": 0}]}
+- The answer (would be something like the following):
 
-data: {"token": [{"type": "text", "text": " 1500), you have a great opportunity to dictate the pace of the game.\n\nBased on historical data for", "index": 0}]}
+```bash
+data: {"token": [{"type": "text", "text": "Based on", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": " this rating gap, here are some strategic recommendations for your opening:\n\n1.  **Scandinavian Defense: Mieses-Kotroc Variation", "index": 0}]}
+data: {"token": [{"type": "text", "text": " the ratings provided (White: 1500, Black: 1", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": "** (Win Rate: 38.5% for White)\n2.  **Queen's Pawn Game:", "index": 0}]}
+data: {"token": [{"type": "text", "text": "200), the model predicts a **White victory**.\n\nHere is the breakdown of the probabilities:\n*   **White", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": " Chigorin Variation** (Win Rate: 27.4% for White)\n3.  **French", "index": 0}]}
+data: {"token": [{"type": "text", "text": " Win:** 65.59%\n*   **Black Win:** 31.57%\n", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": " Defense: Knight Variation** (Win Rate: 27.1% for White)\n\n**Strategic Advice:**\nWith", "index": 0}]}
+data: {"token": [{"type": "text", "text": "*   **Draw:** 2.85%\n\nThe significant rating gap suggests that White has a strong statistical advantage in this", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": " a 300-point advantage, your goal is to reach a solid, playable middlegame where you can", "index": 0}]}
+data: {"token": [{"type": "text", "text": " matchup.", "index": 0}]}
 
-data: {"token": [{"type": "text", "text": " leverage your superior understanding of positional play and tactics. These openings are designed to give you a stable structure, allowing you to out", "index": 0}]}
-
-data: {"token": [{"type": "text", "text": "play your opponent as the game progresses.\n\nWould you like me to explain any of these openings in more detail, or do", "index": 0}]}
-
-data: {"token": [{"type": "text", "text": " you have a specific match you'd like me to analyze?", "index": 0}]}
-
-data: {"token": [{"type": "text", "text": "", "extras": {"signature": "EjQKMgEM[more chars]"}, "index": 0}]}
+data: {"token": [{"type": "text", "text": "", "extras": {"signature": "EjQKMgEMOdbHALJFTkVQIFoTJ0jweSJYMzSj9ftWV+P01woQ1w5rHR0cz8jh7Elgx7vgWgQW"}, "index": 0}]}
 ```
 
