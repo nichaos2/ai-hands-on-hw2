@@ -192,7 +192,7 @@ def recommend_strategic_opening(
         min_games = 50
 
         # 2. Filter the data strictly from the perspective of the user's color
-        if color == "White":
+        if color == "white":
             # Rating diff from White's perspective
             if rating_diff <= -100:
                 target_games = df[(df["white_rating"] - df["black_rating"]) <= -100]
